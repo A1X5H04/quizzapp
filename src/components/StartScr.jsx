@@ -20,12 +20,12 @@ export default function StartScr(props) {
             <img
               className="ic-sun"
               src="./src/assets/fi-bs-sun.svg"
-              alt="Sun Icons"
+              alt="Sun Icon"
             />
             <img
               className="ic-moon"
               src="./src/assets/fi-bs-moon.svg"
-              alt="]Moon Icon"
+              alt="Moon Icon"
             />
           </div>
         </div>
@@ -51,6 +51,7 @@ export default function StartScr(props) {
               handleClick={() => {
                 setShowOption(false);
               }}
+              handleFormData={(prop) => props.handleFormData(prop)}
             />
           )}
         </div>
