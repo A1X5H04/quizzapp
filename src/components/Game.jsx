@@ -32,6 +32,7 @@ function getAnswers(array, i) {
 export default function Game(props) {
   const [question, setQuestion] = React.useState([]);
   const [score, setScore] = React.useState(0);
+  const [solved, setSolved] = React.useState(false);
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&category=32&difficulty=easy")
@@ -113,7 +114,9 @@ export default function Game(props) {
           You got <b>{score}</b> correct answers out of <b>{question.length}</b>{" "}
           questions
         </p>
-        <button onClick={checkAnswer}>Check Answer</button>
+        <button disabled onClick={checkAnswer}>
+          {solved ? "Check Answer" : "Checking Answer"}
+        </button>
       </div>
     </div>
   );

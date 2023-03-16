@@ -9,7 +9,8 @@ export default function StartScr(props) {
       <header>
         <div className="github-link">
           <p>
-            Source Code on <a href="https://github.com/a1x5h04">Github</a>
+            Source Code on{" "}
+            <a href="https://github.com/a1x5h04/quizzapp">Github</a>
           </p>
         </div>
         <div className="theme-toggle">

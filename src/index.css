@@ -113,7 +113,7 @@ select:focus {
 
 .modal {
   position: relative;
-  width: 50rem;
+  width: 25rem;
   height: 50vh;
   background-color: white;
   padding: 25px;
@@ -341,9 +341,9 @@ header>h3 {
   transition: .15s ease;
 }
 
-.result-btn:disabled {
+.result>button:disabled {
   background-color: #c9c9c9;
-  box-shadow: 0px 1px 0px 2px rgb(80, 80, 80);
+  box-shadow: 0px 1px 0px 2px #5c5c5c;
   transform: translateY(4px);
   cursor: not-allowed;
 }
