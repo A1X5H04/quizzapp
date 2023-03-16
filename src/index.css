@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Raleway:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  font-family: 'Raleway', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+
+  /* color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: hsla(238, 0%, 100%, 1);
+  background-image:
+    radial-gradient(at 75% 81%, hsla(297, 71%, 68%, 1) 0px, transparent 50%),
+    radial-gradient(at 63% 33%, hsla(167, 90%, 60%, 1) 0px, transparent 50%),
+    radial-gradient(at 15% 62%, hsla(229, 93%, 69%, 1) 21px, transparent 50%);
+  background-repeat: no-repeat;
+}
+
+h1 {
+  font-size: 5rem;
+  line-height: 1.1;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 15px 0px;
+}
+
+.input-container>input {
+  width: auto;
+  height: 35px;
+  padding: 0px 15px;
+  border: 2px solid black;
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+.input-container>select {
+  width: 100%;
+  height: 40px;
+  padding: 0px 15px;
+  border: 2px solid black;
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+}
+
+.input-container>input:focus,
+select:focus {
+  outline: none;
+}
+
+.modal-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.modal {
+  position: relative;
+  width: 50rem;
+  height: 50vh;
+  background-color: white;
+  padding: 25px;
+  border: 4px solid black;
+}
+
+.modal>a {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  cursor: pointer;
+}
+
+header>h3 {
+  color: #000;
+  font-size: 30px;
+}
+
+.options-container {
+  width: 100%;
+  height: 30vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+.options-container::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa;
+  border: 2.5px solid white;
+}
+
+.options-container::-webkit-scrollbar-thumb {
+  width: 5px;
+  background: #000;
+}
+
+.option-btn-container {
+  padding: 15px;
+}
+
+
+.option-btn-container>button {
+  width: auto;
+  padding: 5px 10px;
+  font-size: 18px;
+  margin: 10px;
+  font-weight: 500;
+  /* box-shadow: 1px 4px 0px 4px black; */
+}
+
+.game-header {
+  width: 100%;
+  height: 5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin: 25px;
+  cursor: pointer;
+}
+
+.logo>img {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.logo>h3 {
+  font-size: 25px;
+  color: black;
+}
+
+#github-link {
+  width: 25px;
+  height: 25px;
+  margin: 50px;
+}
+
+#github-link {
+  color: #000;
+}
+
+.questions-status {
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  margin: 25px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+
+.questions-status>p {
+  width: 100%;
+  font-weight: 700;
+  padding: 5px;
+  cursor: default;
+  transition: .5s ease;
+}
+
+.questions-status>p:hover {
+  background-color: white;
+}
+
+.questions-status>p:nth-of-type(2) {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.questions-status>p>span {
+  font-weight: 500;
+}
+
+.question {
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid black;
+  margin: 25px 0px;
+  background-color: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+
+.question-container {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.75);
+  padding: 5px;
+}
+
+.question-container>p {
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  margin: 30px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.answers-container {
+  width: 100%;
+  padding: 25px 0px;
+  display: flex;
+  border-top: 1px solid rgba(0, 0, 0, 0.75);
+  justify-content: space-around;
+}
+
+.answer-btn {
+  width: auto;
+  padding: 8px 25px;
+  font-size: 18px;
+  margin: 5px 20px;
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
+  background-color: rgba(255, 255, 255, 0.60);
+  border: 2px solid black;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: .1s;
+}
+
+.answer-btn:hover {
+  background-color: #ffffff;
+}
+
+.answer-btn:active {
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}
+
+
+.game-scr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.questions-container {
+  width: 100%;
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.question-container-wrapper {
+  height: 100%;
+  width: 85%;
+}
+
+.questions-container::-webkit-scrollbar {
+  width: 2px;
+  height: 8px;
+  background-color: #fff;
+}
+
+.questions-container::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+.result {
+  margin-top: 30px;
+}
+
+.result>button {
+  width: 100%;
+  padding: 10px 25px;
+  border: 1px solid black;
+  font-size: 25px;
+  box-shadow: 0px 4px 0px 4px black;
+  font-family: 'Raleway', sans-serif;
+  transition: .15s ease;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.result>button:active {
+  box-shadow: 0px 1px 0px 2px black;
+  transform: translateY(4px);
+  transition: .15s ease;
+}
+
+.result-btn:disabled {
+  background-color: #c9c9c9;
+  box-shadow: 0px 1px 0px 2px rgb(80, 80, 80);
+  transform: translateY(4px);
+  cursor: not-allowed;
+}
