@@ -1,12 +1,9 @@
-// Imports
-
 import React from "react";
 import "./App.css";
 import StartScr from "./components/StartScr";
 import Game from "./components/Game";
 import categories from "./categories";
 
-// App Component
 function App() {
   const [start, setStart] = React.useState(false);
   const [category, setCategory] = React.useState({
@@ -22,21 +19,32 @@ function App() {
     type: "",
   });
 
-  function constructEndPoint() {
-    setCategory({
-      category: endPointData.category,
-      type: endPointData.type,
-      difficulty: endPointData.difficulty,
+  React.useEffect(() => {
+    const filterCategories = categories.filter((category) => {
+      return category.categoryNo == endPointData.category;
     });
-  }
+    setCategory({
+      category: filterCategories[0]?.categoryName || "Any Category",
+      type: endPointData?.type || "Mixed",
+      difficulty: endPointData?.difficulty || "Any Difficulty",
+    });
+  }, [endPointData]);
 
-  console.log(endPointData);
+  function constructApiEndPoint() {
+    const amount = endPointData.noOfQuestions,
+      category = endPointData.category,
+      type = endPointData.type,
+      difficulty = endPointData.difficulty;
+
+    const endPoint = `?amount=${amount}&category=${category}&type=${type}&difficulty=${difficulty}`;
+    return endPoint;
+  }
 
   return start ? (
     <Game
       category={category}
       handleClick={() => setStart(false)}
-      endPoint={constructEndPoint}
+      endPoint={constructApiEndPoint()}
     />
   ) : (
     <StartScr

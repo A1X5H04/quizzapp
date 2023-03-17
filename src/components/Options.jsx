@@ -24,18 +24,15 @@ export default function Options(props) {
 
   function handleSubmit() {
     props.handleFormData(formData);
+    props.handleClick();
   }
 
   return (
     <div className="modal-background">
       <div className="modal">
-        <a onClick={props.handleClick}>
-          <img src="./src/assets/fi-bs-cross-small.svg" alt="Close Icon" />
-        </a>
         <header>
           <h3>Options</h3>
         </header>
-
         <div className="options-container">
           <div className="input-container">
             <label htmlFor="input-number">Number of Questions</label>
@@ -94,14 +91,20 @@ export default function Options(props) {
         </div>
 
         <div className="option-btn-container">
-          <button onClick={props.handleClick} id="setdefault-btn">
-            Discard
-          </button>
-          <button onClick={handleSubmit} id="save-btn">
-            Save
-          </button>
+          <button onClick={props.handleClick}>Discard</button>
+          <button onClick={handleSubmit}>Save</button>
         </div>
       </div>
     </div>
   );
 }
+
+// <div>
+// <button>
+//   <img src="./src/assets/caret-left.svg" alt="Decrease" />
+// </button>
+// <div>{count}</div>
+// <button>
+//   <img src="./src/assets/caret-right.svg" alt="Increase" />
+// </button>
+// </div>

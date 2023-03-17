@@ -2,6 +2,7 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "./Question";
+import WooHoo from "./WooHoo";
 
 function getQuestion(array) {
   const newArray = [];
@@ -32,13 +33,15 @@ function getAnswers(array, i) {
 export default function Game(props) {
   const [question, setQuestion] = React.useState([]);
   const [score, setScore] = React.useState(0);
-  // const [solved, setSolved] = React.useState(false);
+  const [solved, setSolved] = React.useState(false);
+  const [round, setRound] = React.useState(1);
+  const [win, setWin] = React.useState(false);
 
   React.useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=32&difficulty=easy")
+    fetch("https://opentdb.com/api.php" + props.endPoint)
       .then((res) => res.json())
       .then((data) => setQuestion(getQuestion(data.results)));
-  }, []);
+  }, [round]);
 
   function selectAnswer(qId, aId) {
     setQuestion((prevAnswer) => {
@@ -57,13 +60,21 @@ export default function Game(props) {
     });
   }
 
+  function playAgain() {
+    setRound((prevRound) => prevRound + 1);
+    setScore(0);
+    setSolved(false);
+  }
+
   function checkAnswer() {
     question.forEach((ques) => {
-      const ansArr = ques.answer.filter((ans) => {
+      const correctAnsArr = ques.answer.filter((ans) => {
         return ans.isCorrectAnswer === true && ans.isSelected === true;
       });
-      setScore((prev) => (prev += ansArr.length));
+      setScore((prev) => (prev += correctAnsArr.length));
     });
+    score == question.length && setWin(true);
+    setSolved(true);
   }
 
   const questionElm = question.map((item) => {
@@ -74,12 +85,14 @@ export default function Game(props) {
         question={item.question}
         answer={item.answer}
         handleClick={selectAnswer}
+        solved={solved}
       />
     );
   });
 
   return (
     <div className="game-scr">
+      {win && <WooHoo />}
       <header className="game-header">
         <div className="logo" onClick={props.handleClick}>
           <img src="./src/assets/brain-outlined.png" alt="Outlined Logo" />
@@ -97,15 +110,16 @@ export default function Game(props) {
       </header>
       <div className="questions-status">
         <p>
-          Category: <span>{props.category.category}</span>
+          Category: <span>{props.category.category.toUpperCase()}</span>
         </p>
         <p>
-          Type: <span>{props.category.type}</span>
+          Type: <span>{props.category.type.toUpperCase()}</span>
         </p>
         <p>
-          Difficulty: <span>{props.category.difficulty}</span>
+          Difficulty: <span>{props.category.difficulty.toUpperCase()}</span>
         </p>
       </div>
+
       <div className="questions-container">
         <div className="question-container-wrapper">{questionElm}</div>
       </div>
@@ -114,8 +128,8 @@ export default function Game(props) {
           You got <b>{score}</b> correct answers out of <b>{question.length}</b>{" "}
           questions
         </p>
-        <button disabled onClick={checkAnswer}>
-          Check Answer
+        <button onClick={solved ? playAgain : checkAnswer}>
+          {solved ? "Play Again" : "Check Answer"}
         </button>
       </div>
     </div>

@@ -9,6 +9,7 @@ export default function Question(props) {
         id={item.id}
         isSelected={item.isSelected}
         isCorrectAnswer={item.isCorrectAnswer}
+        solved={props.solved}
         handleClick={() => props.handleClick(props.id, item.id)}
         value={item.value}
       />
