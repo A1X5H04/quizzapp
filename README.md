@@ -1,11 +1,11 @@
 # Quizzapp
-## This is a react solo projec
+### This is a react solo project
 
-This Quiz Game is entirely made in ⚛️ react with a clean and minimal look, you may find my figma file here.
+This Quiz Game is entirely made in ⚛️ react with a clean and minimal look, you may find my figma file [here](https://www.figma.com/file/ZOucYaCmahCof1MxNCv5yf/Quizzapp?node-id=0%3A1&t=MVstHvwWEe2n5qDr-1).
 
 
 ## Features 
-Quizzapp has many features they are listed below : 
+### Quizzapp has many features they are listed below : 
 
 1. Upto 25 Categories
 2. Three Difficulty Modes: Easy, Medium and Hard
@@ -15,7 +15,7 @@ Quizzapp has many features they are listed below :
 
 ## For Development Purpose
 
-If you want to contribute to this project, you are more than welcome ❤️ 
+### If you want to contribute to this project, you are more than welcome ❤️ 
 
 This app was created using vite.js.
 
@@ -26,11 +26,11 @@ This app was created using vite.js.
 
 ## Credits 
 
-@username for help (I kanged some code from him)
-@bobziroll for this solo project
+@Brag2gr8 for help (I kanged some code from him)
+@bobziroll for this solo project idea
 
 
-See Live Demo Here
+See Live Demo [here](https://www.google.com)
 
 
 
