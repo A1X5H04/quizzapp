@@ -1,5 +1,6 @@
 import React from "react";
 import Options from "./Options";
+import { Sun, Moon } from "@phosphor-icons/react";
 
 export default function StartScr(props) {
   const [showOption, setShowOption] = React.useState(false);
@@ -17,16 +18,8 @@ export default function StartScr(props) {
           <div className="toggle-border">
             <input type="checkbox" name="theme" id="theme-toggle" />
             <div className="toggle-thumb"></div>
-            <img
-              className="ic-sun"
-              src="./src/assets/fi-bs-sun.svg"
-              alt="Sun Icon"
-            />
-            <img
-              className="ic-moon"
-              src="./src/assets/fi-bs-moon.svg"
-              alt="Moon Icon"
-            />
+            <Sun className="ic-sun" size={32} weight="bold" color="white" />
+            <Moon className="ic-moon" size={32} weight="bold" color="white" />
           </div>
         </div>
       </header>

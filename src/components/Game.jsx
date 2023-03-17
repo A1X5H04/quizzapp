@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "./Question";
 import WooHoo from "./WooHoo";
+import { GithubLogo } from "@phosphor-icons/react";
 
 function getQuestion(array) {
   const newArray = [];
@@ -35,7 +36,6 @@ export default function Game(props) {
   const [score, setScore] = React.useState(0);
   const [solved, setSolved] = React.useState(false);
   const [round, setRound] = React.useState(1);
-  const [win, setWin] = React.useState(false);
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php" + props.endPoint)
@@ -93,14 +93,10 @@ export default function Game(props) {
       />
     );
   });
-  console.log(score, question.length);
-  React.useEffect(() => {
-    score == question.length && setWin(true);
-  }, [score]);
 
   return (
     <div className="game-scr">
-      {win && <WooHoo />}
+      {score == question.length && <WooHoo />}
       <header className="game-header">
         <div className="logo" onClick={props.handleClick}>
           <img src="./src/assets/brain-outlined.png" alt="Outlined Logo" />
@@ -108,11 +104,7 @@ export default function Game(props) {
         </div>
         <div>
           <a href="https://github.com/a1x5h04">
-            <img
-              id="github-link"
-              src="./src/assets/github-logo.svg"
-              alt="Github Logo"
-            />
+            <GithubLogo size={32} weight="bold" color="black" />
           </a>
         </div>
       </header>
