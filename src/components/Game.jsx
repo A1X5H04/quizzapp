@@ -58,6 +58,11 @@ export default function Game(props) {
           : ques;
       });
     });
+    question.forEach((item) => {
+      const selectedAnsArr = item.answer.filter((ans) => {
+        return ans.isSelected == true;
+      });
+    });
   }
 
   function playAgain() {
@@ -73,7 +78,6 @@ export default function Game(props) {
       });
       setScore((prev) => (prev += correctAnsArr.length));
     });
-    score == question.length && setWin(true);
     setSolved(true);
   }
 
@@ -89,6 +93,10 @@ export default function Game(props) {
       />
     );
   });
+  console.log(score, question.length);
+  React.useEffect(() => {
+    score == question.length && setWin(true);
+  }, [score]);
 
   return (
     <div className="game-scr">
@@ -119,7 +127,6 @@ export default function Game(props) {
           Difficulty: <span>{props.category.difficulty.toUpperCase()}</span>
         </p>
       </div>
-
       <div className="questions-container">
         <div className="question-container-wrapper">{questionElm}</div>
       </div>

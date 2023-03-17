@@ -24,7 +24,7 @@ function App() {
       return category.categoryNo == endPointData.category;
     });
     setCategory({
-      category: filterCategories[0]?.categoryName || "Any Category",
+      category: filterCategories.at(0)?.categoryName || "Any Category",
       type: endPointData?.type || "Mixed",
       difficulty: endPointData?.difficulty || "Any Difficulty",
     });
