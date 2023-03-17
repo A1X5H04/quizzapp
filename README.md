@@ -30,7 +30,7 @@ This app was created using vite.js.
 @bobziroll for this solo project idea
 
 
-See Live Demo [here](https://www.google.com)
+See Live Demo [here](https://quizzapp-a1x5h04.netlify.app/)
 
 
 
