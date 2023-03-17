@@ -1,13 +1,36 @@
 # Quizzapp
-## A fun game to test your knowledge
+## This is a react solo projec
 
-This game uses OPEN TDB API to fetch questions from the server 
-it has a clean and beautiful interface to enjoy your game
-
-You can choose upto 20 different categories, you can choose between question types, difficulty and numbers
-
-This is project is still under development so the link will soon be available once it's over
+This Quiz Game is entirely made in ⚛️ react with a clean and minimal look, you may find my figma file here.
 
 
-Play it now ! 
-Link : currently unavailable...
+## Features 
+Quizzapp has many features they are listed below : 
+
+1. Upto 25 Categories
+2. Three Difficulty Modes: Easy, Medium and Hard
+3. Two types: true/false and multiple choice question
+4. Choose how many questions you want: from 1 (default is 5) to how many you can handle !
+
+
+## For Development Purpose
+
+If you want to contribute to this project, you are more than welcome ❤️ 
+
+This app was created using vite.js.
+
+1. To get started, you must install dependencies first, to install dependencies run `npm install`
+
+2. Then to create development server, run `npm run dev`
+
+
+## Credits 
+
+@username for help (I kanged some code from him)
+@bobziroll for this solo project
+
+
+See Live Demo Here
+
+
+
