@@ -4,6 +4,7 @@ import { decode } from "html-entities";
 import Question from "./Question";
 import WooHoo from "./WooHoo";
 import { GithubLogo } from "@phosphor-icons/react";
+import { useTimer } from "use-timer";
 
 function getQuestion(array) {
   const newArray = [];
@@ -40,6 +41,7 @@ export default function Game(props) {
   const [round, setRound] = React.useState(1);
   const [score, setScore] = React.useState(0);
   const [win, setWin] = React.useState(false);
+  const { time, start, reset } = useTimer({ interval: 1100 - round * 100 });
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php" + props.endPoint)
@@ -62,12 +64,14 @@ export default function Game(props) {
             }
           : ques;
       });
+      startTransition();
     });
     // Not the best solution out there, but I am glad I did it !
     const filter = question.filter((ques) => {
       return ques.isAttempted;
     });
     filter.length + 1 == question.length && setattempt(true);
+    start();
   }
 
   function playAgain() {
@@ -76,6 +80,7 @@ export default function Game(props) {
     setSolved(false);
     setWin(false);
     setattempt(false);
+    reset();
   }
 
   function checkAnswer() {
@@ -126,7 +131,7 @@ export default function Game(props) {
           Difficulty: <span>{props.category.difficulty.toUpperCase()}</span>
         </p>
         <p>
-          Time: <span>{"seconds"}</span>
+          Time: <span>{time}s</span>
         </p>
         <p>
           Round: <span>{round}</span>
