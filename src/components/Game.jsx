@@ -10,6 +10,7 @@ function getQuestion(array) {
   array.map((item, i) => {
     newArray.push({
       id: nanoid(),
+      isAttempted: false,
       question: decode(item.question),
       answer: getAnswers(array, i),
     });
@@ -33,9 +34,12 @@ function getAnswers(array, i) {
 
 export default function Game(props) {
   const [question, setQuestion] = React.useState([]);
-  const [score, setScore] = React.useState(0);
+  const [correctAnswer, setCorrectAnswer] = React.useState(0);
   const [solved, setSolved] = React.useState(false);
+  const [attempt, setattempt] = React.useState(false);
   const [round, setRound] = React.useState(1);
+  const [score, setScore] = React.useState(0);
+  const [win, setWin] = React.useState(false);
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php" + props.endPoint)
@@ -44,11 +48,12 @@ export default function Game(props) {
   }, [round]);
 
   function selectAnswer(qId, aId) {
-    setQuestion((prevAnswer) => {
-      return prevAnswer.map((ques) => {
+    setQuestion((prevQuestion) => {
+      return prevQuestion.map((ques) => {
         return ques.id === qId
           ? {
               ...ques,
+              isAttempted: true,
               answer: ques.answer.map((ans) => {
                 return ans.id === aId
                   ? { ...ans, isSelected: true }
@@ -58,17 +63,19 @@ export default function Game(props) {
           : ques;
       });
     });
-    question.forEach((item) => {
-      const selectedAnsArr = item.answer.filter((ans) => {
-        return ans.isSelected == true;
-      });
+    // Not the best solution out there, but I am glad I did it !
+    const filter = question.filter((ques) => {
+      return ques.isAttempted;
     });
+    filter.length + 1 == question.length && setattempt(true);
   }
 
   function playAgain() {
     setRound((prevRound) => prevRound + 1);
-    setScore(0);
+    setCorrectAnswer(0);
     setSolved(false);
+    setWin(false);
+    setattempt(false);
   }
 
   function checkAnswer() {
@@ -76,7 +83,7 @@ export default function Game(props) {
       const correctAnsArr = ques.answer.filter((ans) => {
         return ans.isCorrectAnswer === true && ans.isSelected === true;
       });
-      setScore((prev) => (prev += correctAnsArr.length));
+      setCorrectAnswer((prev) => (prev += correctAnsArr.length));
     });
     setSolved(true);
   }
@@ -96,7 +103,7 @@ export default function Game(props) {
 
   return (
     <div className="game-scr">
-      {score == question.length && <WooHoo />}
+      {win && <WooHoo />}
       <header className="game-header">
         <div className="logo" onClick={props.handleClick}>
           <img src="./src/assets/brain-outlined.png" alt="Outlined Logo" />
@@ -108,7 +115,7 @@ export default function Game(props) {
           </a>
         </div>
       </header>
-      <div className="questions-status">
+      <div className="status">
         <p>
           Category: <span>{props.category.category.toUpperCase()}</span>
         </p>
@@ -118,16 +125,32 @@ export default function Game(props) {
         <p>
           Difficulty: <span>{props.category.difficulty.toUpperCase()}</span>
         </p>
+        <p>
+          Time: <span>{"seconds"}</span>
+        </p>
+        <p>
+          Round: <span>{round}</span>
+        </p>
+        <p>
+          Score: <span>{score}</span>
+        </p>
       </div>
       <div className="questions-container">
         <div className="question-container-wrapper">{questionElm}</div>
       </div>
+
       <div className="result">
-        <p>
-          You got <b>{score}</b> correct answers out of <b>{question.length}</b>{" "}
-          questions
-        </p>
-        <button onClick={solved ? playAgain : checkAnswer}>
+        {attempt ? (
+          <p>
+            You got <b>{correctAnswer}</b> correct answers out of{" "}
+            <b>{question.length}</b> questions
+          </p>
+        ) : (
+          <p>
+            Please Attempt <b>{question.length}</b> question to Continue
+          </p>
+        )}
+        <button disabled={!attempt} onClick={solved ? playAgain : checkAnswer}>
           {solved ? "Play Again" : "Check Answer"}
         </button>
       </div>

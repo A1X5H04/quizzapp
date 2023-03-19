@@ -6,7 +6,7 @@ export default function WooHoo() {
       <ReactConfetti />
       <div className="woohoo">
         <img src="./src/assets/congratulation.png" alt="" />
-        <h1>Right On Bro!!</h1>
+        <h1>Bullseye!</h1>
       </div>
     </div>
   );

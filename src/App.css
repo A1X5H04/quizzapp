@@ -26,24 +26,24 @@ header {
   padding: 1.5em;
 }
 
-.start-image > img {
+.start-image>img {
   height: 125px;
   width: 125px;
   margin-bottom: 50px;
 }
 
-.start-image > h1 {
+.start-image>h1 {
   line-height: 0;
   color: black;
 }
 
-.start-image > p {
+.start-image>p {
   position: relative;
   margin-top: 5rem;
   color: #000;
 }
 
-.start-image > p::after {
+.start-image>p::after {
   position: absolute;
   content: "";
   width: 100px;
@@ -54,7 +54,7 @@ header {
   margin: 0px 12px;
 }
 
-.start-image > p::before {
+.start-image>p::before {
   position: absolute;
   content: "";
   width: 100px;
@@ -74,7 +74,7 @@ header {
   height: 8rem;
 }
 
-.start-btns > button {
+.start-btns>button {
   width: 100%;
   padding: 10px 25px;
   border: 1px solid black;
@@ -87,17 +87,17 @@ header {
   cursor: pointer;
 }
 
-.start-btns > button:active {
+.start-btns>button:active {
   box-shadow: 0px 1px 0px 2px black;
   transform: translateY(4px);
   transition: .15s ease;
 }
 
-.github-link > p {
+.github-link>p {
   font-size: 18px;
 }
 
-.github-link > p > a {
+.github-link>p>a {
   width: auto;
   position: relative;
   margin-top: 25px;
@@ -111,11 +111,11 @@ header {
   isolation: isolate;
 }
 
-.github-link > p > a:hover {
+.github-link>p>a:hover {
   color: white;
 }
 
-.github-link > p > a::after {
+.github-link>p>a::after {
   position: absolute;
   content: "";
   width: 100%;
@@ -128,7 +128,7 @@ header {
   z-index: -1;
 }
 
-.github-link > p > a:hover::after {
+.github-link>p>a:hover::after {
   height: 100%;
   transition: .5s ease;
 }
@@ -146,7 +146,7 @@ header {
   box-shadow: 2px 4px black;
 }
 
-.toggle-border > input {
+.toggle-border>input {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -164,14 +164,14 @@ header {
   transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.toggle-border > .ic-sun {
+.toggle-border>.ic-sun {
   position: absolute;
   left: 12px;
   width: 18px;
   transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.toggle-border > .ic-moon {
+.toggle-border>.ic-moon {
   position: absolute;
   right: 12.5px;
   width: 18px;
@@ -179,17 +179,16 @@ header {
   transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.toggle-border > input:checked + .toggle-thumb {
-   -webkit-transform: translateX(34px);
+.toggle-border>input:checked+.toggle-thumb {
+  -webkit-transform: translateX(34px);
   -ms-transform: translateX(34px);
   transform: translateX(34px);
 }
 
-.toggle-border > input:checked ~ .ic-sun {
+.toggle-border>input:checked~.ic-sun {
   transform: translateX(5px);
 }
 
-.toggle-border > input:checked ~ .ic-moon {
+.toggle-border>input:checked~.ic-moon {
   transform: translateX(0px);
 }
-
