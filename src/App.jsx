@@ -6,6 +6,7 @@ import categories from "./categories";
 
 function App() {
   const [start, setStart] = React.useState(false);
+  const [darkMode, setDarkMode] = React.useState(false);
   const [category, setCategory] = React.useState({
     category: "Any Category",
     type: "Mixed",
@@ -14,10 +15,16 @@ function App() {
 
   const [endPointData, setEndPointData] = React.useState({
     noOfQuestions: "5",
+    noOfRounds: "2",
     category: "",
     difficulty: "",
     type: "",
   });
+
+  const bodyStyle = {
+    backgroundColor: darkMode ? "black" : "white",
+    color: darkMode ? "white" : "black",
+  };
 
   React.useEffect(() => {
     const filterCategories = categories.filter((category) => {
@@ -40,16 +47,25 @@ function App() {
     return endPoint;
   }
 
+  function handleThemeChange(e) {
+    setDarkMode(e.target.checked);
+  }
+
+  console.log(darkMode);
+
   return start ? (
     <Game
       category={category}
       handleClick={() => setStart(false)}
       endPoint={constructApiEndPoint()}
+      darkMode={darkMode}
     />
   ) : (
     <StartScr
       handleClick={() => setStart(true)}
       handleFormData={setEndPointData}
+      handleThemeChange={handleThemeChange}
+      darkMode={darkMode}
     />
   );
 }
