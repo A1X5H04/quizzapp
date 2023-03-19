@@ -211,16 +211,11 @@ header>h3 {
   display: flex;
   align-items: center;
   margin: 25px;
-  cursor: pointer;
 }
 
-.logo>img {
-  width: 30px;
-  height: 30px;
-  margin: 10px;
-}
 
 .logo>h3 {
+  margin: 5px;
   font-size: 25px;
   color: black;
 }

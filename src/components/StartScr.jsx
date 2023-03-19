@@ -1,6 +1,6 @@
 import React from "react";
 import Options from "./Options";
-import { Sun, Moon } from "@phosphor-icons/react";
+import { Brain, Sun, Moon } from "@phosphor-icons/react";
 
 export default function StartScr(props) {
   const [showOption, setShowOption] = React.useState(false);
@@ -16,7 +16,13 @@ export default function StartScr(props) {
         </div>
         <div className="theme-toggle">
           <div className="toggle-border">
-            <input type="checkbox" name="theme" id="theme-toggle" />
+            <input
+              type="checkbox"
+              name="theme"
+              onChange={props.handleThemeChange}
+              checked={props.darkMode}
+              id="theme-toggle"
+            />
             <div className="toggle-thumb"></div>
             <Sun className="ic-sun" size={32} weight="bold" color="white" />
             <Moon className="ic-moon" size={32} weight="bold" color="white" />
@@ -25,7 +31,7 @@ export default function StartScr(props) {
       </header>
       <div className="start-screen">
         <div className="start-image">
-          <img src="./src/assets/brain.png" alt="Vector Brain Image" />
+          <Brain className="brain-logo" size={150} weight="fill" />
           <h1>QuizZapp</h1>
           <p>Test Your QuizZ skills</p>
         </div>

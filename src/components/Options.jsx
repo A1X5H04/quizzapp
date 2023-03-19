@@ -8,6 +8,7 @@ export default function Options(props) {
 
   const [formData, setFormData] = React.useState({
     noOfQuestions: "5",
+    noOfRounds: "2",
     category: "",
     difficulty: "",
     type: "",
@@ -44,6 +45,19 @@ export default function Options(props) {
               min={5}
               onChange={handleFormChange}
               value={formData.noOfQuestions}
+            />
+          </div>
+
+          <div className="input-container">
+            <label htmlFor="input-number">Number of Rounds</label>
+            <input
+              type="number"
+              name="noOfRounds"
+              id="input-number"
+              max={10}
+              min={2}
+              onChange={handleFormChange}
+              value={formData.noOfRounds}
             />
           </div>
 

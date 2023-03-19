@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "./Question";
 import WooHoo from "./WooHoo";
-import { GithubLogo } from "@phosphor-icons/react";
+import { Brain, SignOut } from "@phosphor-icons/react";
 import { useTimer } from "use-timer";
 
 function getQuestion(array) {
@@ -40,6 +40,7 @@ export default function Game(props) {
   const [attempt, setattempt] = React.useState(false);
   const [round, setRound] = React.useState(1);
   const [score, setScore] = React.useState(0);
+  const [moves, setMoves] = React.useState(0);
   const [win, setWin] = React.useState(false);
   const { time, start, reset } = useTimer({ interval: 1100 - round * 100 });
 
@@ -47,6 +48,7 @@ export default function Game(props) {
     fetch("https://opentdb.com/api.php" + props.endPoint)
       .then((res) => res.json())
       .then((data) => setQuestion(getQuestion(data.results)));
+    start();
   }, [round]);
 
   function selectAnswer(qId, aId) {
@@ -64,17 +66,16 @@ export default function Game(props) {
             }
           : ques;
       });
-      startTransition();
     });
     // Not the best solution out there, but I am glad I did it !
     const filter = question.filter((ques) => {
       return ques.isAttempted;
     });
     filter.length + 1 == question.length && setattempt(true);
-    start();
+    setMoves((prevMoves) => prevMoves + 1);
   }
 
-  function playAgain() {
+  function nextRound() {
     setRound((prevRound) => prevRound + 1);
     setCorrectAnswer(0);
     setSolved(false);
@@ -82,6 +83,14 @@ export default function Game(props) {
     setattempt(false);
     reset();
   }
+
+  // function restartGame() {}
+
+  // function calculateScore() {
+  //   const timeScore = 10 + Math.exp(round) - moves - time;
+  //   setScore((prev) => prev + timeScore);
+  //   console.log(score);
+  // }
 
   function checkAnswer() {
     question.forEach((ques) => {
@@ -110,14 +119,17 @@ export default function Game(props) {
     <div className="game-scr">
       {win && <WooHoo />}
       <header className="game-header">
-        <div className="logo" onClick={props.handleClick}>
-          <img src="./src/assets/brain-outlined.png" alt="Outlined Logo" />
+        <div className="logo">
+          <Brain size={32} weight="bold" />
           <h3>QuizZapp</h3>
         </div>
         <div>
-          <a href="https://github.com/a1x5h04">
-            <GithubLogo size={32} weight="bold" color="black" />
-          </a>
+          <SignOut
+            style={{ cursor: "pointer" }}
+            onClick={props.handleClick}
+            size={25}
+            weight="fill"
+          />
         </div>
       </header>
       <div className="status">
@@ -137,7 +149,7 @@ export default function Game(props) {
           Round: <span>{round}</span>
         </p>
         <p>
-          Score: <span>{score}</span>
+          Moves: <span>{moves}</span>
         </p>
       </div>
       <div className="questions-container">
@@ -152,11 +164,11 @@ export default function Game(props) {
           </p>
         ) : (
           <p>
-            Please Attempt <b>{question.length}</b> question to Continue
+            Please Attempt <b>{question.length}</b> question to check answer
           </p>
         )}
-        <button disabled={!attempt} onClick={solved ? playAgain : checkAnswer}>
-          {solved ? "Play Again" : "Check Answer"}
+        <button disabled={!attempt} onClick={solved ? nextRound : checkAnswer}>
+          {solved ? "Next Round" : "Check Answer"}
         </button>
       </div>
     </div>
