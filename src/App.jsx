@@ -1,6 +1,5 @@
 import React from "react";
-import "./App.css";
-import StartScr from "./components/StartScr";
+import Home from "./components/Home";
 import Game from "./components/Game";
 import categories from "./categories";
 
@@ -14,17 +13,18 @@ function App() {
   });
 
   const [endPointData, setEndPointData] = React.useState({
+    mode: "",
     noOfQuestions: "5",
     noOfRounds: "2",
-    category: "",
-    difficulty: "",
-    type: "",
+    time: "0.2",
+    category: "any-category",
+    difficulty: "any-difficulty",
+    type: "any-type",
   });
 
-  const bodyStyle = {
-    backgroundColor: darkMode ? "black" : "white",
-    color: darkMode ? "white" : "black",
-  };
+  const bodyStyleObj = document.body.style;
+  bodyStyleObj.backgroundColor = darkMode ? "black" : "white";
+  bodyStyleObj.color = darkMode ? "white" : "black";
 
   React.useEffect(() => {
     const filterCategories = categories.filter((category) => {
@@ -51,17 +51,18 @@ function App() {
     setDarkMode(e.target.checked);
   }
 
-  console.log(darkMode);
-
   return start ? (
     <Game
       category={category}
       handleClick={() => setStart(false)}
       endPoint={constructApiEndPoint()}
+      time={endPointData.time * 60}
+      noOfRounds={endPointData.noOfRounds}
+      mode={endPointData.mode}
       darkMode={darkMode}
     />
   ) : (
-    <StartScr
+    <Home
       handleClick={() => setStart(true)}
       handleFormData={setEndPointData}
       handleThemeChange={handleThemeChange}

@@ -3,8 +3,13 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "./Question";
 import WooHoo from "./WooHoo";
+import GameOver from "./GameOver";
 import { Brain, SignOut } from "@phosphor-icons/react";
-import { useTimer } from "use-timer";
+import { useTimer } from "react-timer-hook";
+
+// noOfRounds={endPointData.noOfRounds}
+// mode={endPointData.mode}
+// darkMode={darkMode}
 
 function getQuestion(array) {
   const newArray = [];
@@ -34,6 +39,9 @@ function getAnswers(array, i) {
 }
 
 export default function Game(props) {
+  const expiryTimestamp = new Date();
+  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + props.time);
+
   const [question, setQuestion] = React.useState([]);
   const [correctAnswer, setCorrectAnswer] = React.useState(0);
   const [solved, setSolved] = React.useState(false);
@@ -42,13 +50,17 @@ export default function Game(props) {
   const [score, setScore] = React.useState(0);
   const [moves, setMoves] = React.useState(0);
   const [win, setWin] = React.useState(false);
-  const { time, start, reset } = useTimer({ interval: 1100 - round * 100 });
+  const [gameOver, setGameOver] = React.useState(false);
+  const { seconds, minutes, isRunning, start, pause, resume, restart } =
+    useTimer({
+      expiryTimestamp,
+      onExpire: () => setGameOver(true),
+    });
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php" + props.endPoint)
       .then((res) => res.json())
       .then((data) => setQuestion(getQuestion(data.results)));
-    start();
   }, [round]);
 
   function selectAnswer(qId, aId) {
@@ -67,7 +79,7 @@ export default function Game(props) {
           : ques;
       });
     });
-    // Not the best solution out there, but I am glad I did it !
+
     const filter = question.filter((ques) => {
       return ques.isAttempted;
     });
@@ -81,16 +93,9 @@ export default function Game(props) {
     setSolved(false);
     setWin(false);
     setattempt(false);
-    reset();
   }
 
-  // function restartGame() {}
-
-  // function calculateScore() {
-  //   const timeScore = 10 + Math.exp(round) - moves - time;
-  //   setScore((prev) => prev + timeScore);
-  //   console.log(score);
-  // }
+  function restartGame() {}
 
   function checkAnswer() {
     question.forEach((ques) => {
@@ -110,6 +115,7 @@ export default function Game(props) {
         question={item.question}
         answer={item.answer}
         handleClick={selectAnswer}
+        darkMode={props.darkMode}
         solved={solved}
       />
     );
@@ -117,7 +123,16 @@ export default function Game(props) {
 
   return (
     <div className="game-scr">
-      {win && <WooHoo />}
+      {gameOver && (
+        <GameOver
+          handleClick={props.handleClick}
+          mode={props.mode}
+          moves={moves}
+          rounds={round}
+          correct={correctAnswer}
+          length={question.length}
+        />
+      )}
       <header className="game-header">
         <div className="logo">
           <Brain size={32} weight="bold" />
@@ -143,7 +158,8 @@ export default function Game(props) {
           Difficulty: <span>{props.category.difficulty.toUpperCase()}</span>
         </p>
         <p>
-          Time: <span>{time}s</span>
+          Time Left: <span>{minutes == 0 ? "" : minutes + "m"}</span>
+          <span>{seconds}s</span>
         </p>
         <p>
           Round: <span>{round}</span>
