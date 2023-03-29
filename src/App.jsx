@@ -16,7 +16,7 @@ function App() {
     mode: "",
     noOfQuestions: "5",
     noOfRounds: "2",
-    time: "0.2",
+    time: "2",
     category: "any-category",
     difficulty: "any-difficulty",
     type: "any-type",

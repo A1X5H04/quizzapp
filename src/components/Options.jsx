@@ -10,7 +10,7 @@ export default function Options(props) {
     mode: "",
     noOfQuestions: "5",
     noOfRounds: "2",
-    time: "0.2",
+    time: "2",
     category: "",
     difficulty: "",
     type: "",
