@@ -32,6 +32,8 @@ body {
   height: 100%;
 }
 
+/* Light Mode CSS */
+
 body {
   background-image:
     radial-gradient(at 75% 81%, hsla(297, 71%, 68%, 1) 0px, transparent 50%),
@@ -309,11 +311,11 @@ select:focus {
   outline: none;
 }
 
-.options-modal {
+.modal {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   width: 30rem;
   height: 30rem;
@@ -323,12 +325,38 @@ select:focus {
   overflow: hidden;
 }
 
+.modal>header {
+  display: block;
+  margin-bottom: 15px;
+  padding: 5px;
+  border-bottom: 2px solid black;
+}
 
-.options-modal>header>h3 {
+.modal>header>h3 {
   margin: 0 auto;
   color: #000;
-  font-size: 30px;
+  font-size: 35px;
 }
+
+.modal>button {
+  width: auto;
+  padding: 10px 15px;
+  border: 1px solid black;
+  font-size: 18px;
+  box-shadow: 0px 2px 0px 2px black;
+  font-family: 'Raleway', sans-serif;
+  transition: .15s ease;
+  background-color: white;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.modal>button:active {
+  box-shadow: 0px 1px 0px 1px black;
+  transform: translateY(4px);
+  transition: .15s ease;
+}
+
 
 .options-container {
   width: 100%;
@@ -554,46 +582,19 @@ select:focus {
   cursor: not-allowed;
 }
 
-.gameover-modal {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 30rem;
-  height: 30rem;
-  background-color: white;
-  padding: 15px 25px;
-  border: 4px solid black;
-  overflow: hidden;
-}
-
-.gameover-modal>header {
-  display: block;
-  margin-bottom: 15px;
-  padding: 5px;
-  border-bottom: 2px solid black;
-}
-
-.gameover-modal>header>h3 {
-  margin: 0 auto;
-  color: #000;
-  font-size: 35px;
-}
-
-
-.gameover-modal>.content>h4 {
-  font-weight: 500;
+.gameover>.content>h4 {
+  font-weight: 600;
+  font-size: 20px;
   line-height: normal;
   margin: 25px;
 }
 
-.gameover-modal>.content>h4>span {
+.gameover>.content>h4>span {
   font-weight: 800;
   font-size: 75px;
 }
 
-.gameover-modal>.content>.stats-grid {
+.gameover>.content>.stats-grid {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -603,32 +604,40 @@ select:focus {
   background-color: black;
 }
 
-.gameover-modal>.content>.stats-grid>div {
+.gameover>.content>.stats-grid>div {
   display: block;
   text-align: center;
   margin: 10px 20px;
 }
 
-.gameover-modal>.content>.stats-grid>div>p {
+.gameover>.content>.stats-grid>div>p {
   font-weight: 600;
 }
 
-
-.gameover-modal>button {
-  width: auto;
-  padding: 10px 25px;
-  border: 1px solid black;
-  font-size: 25px;
-  box-shadow: 0px 4px 0px 4px black;
-  font-family: 'Raleway', sans-serif;
-  transition: .15s ease;
-  background-color: white;
-  cursor: pointer;
-  margin: 0 auto;
+.leaderboard-container {
+  width: 100%;
+  height: 8rem;
+  background-color: black;
+  margin: 10px 0px;
 }
 
-.gameover-modal>button:active {
-  box-shadow: 0px 1px 0px 2px black;
-  transform: translateY(4px);
-  transition: .15s ease;
+.game-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* background-color: black;
+  color: white; */
+  gap: 10px;
+  padding: 10px;
+  margin: 10px 0px;
 }
+
+.game-stats>div {
+  display: block;
+  text-align: center;
+}
+
+.game-stats>div>p {
+  font-weight: 600;
+}
+
+/* Dark Mode CSS */

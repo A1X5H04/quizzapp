@@ -1,4 +1,5 @@
 import React from "react";
+import { FadersHorizontal } from "@phosphor-icons/react";
 import categories from "../categories";
 
 export default function Options(props) {
@@ -33,8 +34,9 @@ export default function Options(props) {
   return (
     <>
       <div className="modal-background">
-        <div className="options-modal">
+        <div className="modal">
           <header>
+            <FadersHorizontal size={32} weight="fill" />
             <h3>Options</h3>
           </header>
           <div className="options-container">

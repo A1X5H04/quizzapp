@@ -31,7 +31,7 @@ export default function gameOverScr(props) {
 
   return (
     <div className="modal-background">
-      <div className="gameover-modal">
+      <div className="gameover modal">
         {renderHeader}
         <div className="content">
           <h4>

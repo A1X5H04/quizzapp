@@ -1,9 +1,11 @@
 import React from "react";
 import Options from "./Options";
 import { Brain, Sun, Moon } from "@phosphor-icons/react";
+import LeaderBoard from "./LeaderBoard";
 
 export default function StartScr(props) {
   const [showOption, setShowOption] = React.useState(false);
+  const [showLeaderBoard, setShowLeaderBoard] = React.useState(false);
 
   return (
     <>

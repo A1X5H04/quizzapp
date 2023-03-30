@@ -17,9 +17,9 @@ function App() {
     noOfQuestions: "5",
     noOfRounds: "2",
     time: "2",
-    category: "any-category",
-    difficulty: "any-difficulty",
-    type: "any-type",
+    category: "",
+    difficulty: "",
+    type: "",
   });
 
   const bodyStyleObj = document.body.style;

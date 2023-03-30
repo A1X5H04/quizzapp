@@ -7,10 +7,6 @@ import GameOver from "./GameOver";
 import { Brain, SignOut } from "@phosphor-icons/react";
 import { useTimer } from "react-timer-hook";
 
-// noOfRounds={endPointData.noOfRounds}
-// mode={endPointData.mode}
-// darkMode={darkMode}
-
 function getQuestion(array) {
   const newArray = [];
   array.map((item, i) => {
@@ -44,6 +40,7 @@ export default function Game(props) {
 
   const [question, setQuestion] = React.useState([]);
   const [correctAnswer, setCorrectAnswer] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [solved, setSolved] = React.useState(false);
   const [attempt, setattempt] = React.useState(false);
   const [round, setRound] = React.useState(1);
@@ -58,9 +55,13 @@ export default function Game(props) {
     });
 
   React.useEffect(() => {
+    setIsLoading(true);
     fetch("https://opentdb.com/api.php" + props.endPoint)
       .then((res) => res.json())
-      .then((data) => setQuestion(getQuestion(data.results)));
+      .then((data) => {
+        setQuestion(getQuestion(data.results));
+        setIsLoading(false);
+      });
   }, [round]);
 
   function selectAnswer(qId, aId) {
@@ -95,8 +96,6 @@ export default function Game(props) {
     setattempt(false);
   }
 
-  function restartGame() {}
-
   function checkAnswer() {
     question.forEach((ques) => {
       const correctAnsArr = ques.answer.filter((ans) => {
@@ -105,6 +104,10 @@ export default function Game(props) {
       setCorrectAnswer((prev) => (prev += correctAnsArr.length));
     });
     setSolved(true);
+  }
+
+  function calculateScore() {
+    const wrongAnswer = correctAnswer - question.length;
   }
 
   const questionElm = question.map((item) => {
@@ -169,7 +172,11 @@ export default function Game(props) {
         </p>
       </div>
       <div className="questions-container">
-        <div className="question-container-wrapper">{questionElm}</div>
+        {isLoading ? (
+          <img style={{ width: "75px" }} src="/assets/loading.gif" />
+        ) : (
+          <div className="question-container-wrapper">{questionElm}</div>
+        )}
       </div>
 
       <div className="result">
