@@ -46,8 +46,7 @@ export default function Options(props) {
                 name="mode"
                 id="input-mode"
                 value={formData.mode}
-                onChange={handleFormChange}
-              >
+                onChange={handleFormChange}>
                 <option value="">Casual</option>
                 <option value="time">Time</option>
                 <option value="round">Round</option>
@@ -110,8 +109,7 @@ export default function Options(props) {
                 name="category"
                 id="input-category"
                 value={formData.category}
-                onChange={handleFormChange}
-              >
+                onChange={handleFormChange}>
                 <option value="">Any Category</option>
                 {categoryElm}
               </select>
@@ -123,8 +121,7 @@ export default function Options(props) {
                 name="difficulty"
                 id="input-difficulty"
                 value={formData.difficulty}
-                onChange={handleFormChange}
-              >
+                onChange={handleFormChange}>
                 <option value="">Any Difficulty</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
@@ -138,8 +135,7 @@ export default function Options(props) {
                 name="type"
                 id="input-type"
                 value={formData.type}
-                onChange={handleFormChange}
-              >
+                onChange={handleFormChange}>
                 <option value="">Any Type</option>
                 <option value="multiple">Multiple Choice</option>
                 <option value="boolean">True/False</option>

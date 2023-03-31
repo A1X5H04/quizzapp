@@ -2,10 +2,13 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "./Question";
-import WooHoo from "./WooHoo";
 import GameOver from "./GameOver";
 import { Brain, SignOut } from "@phosphor-icons/react";
-import { useTimer } from "react-timer-hook";
+import RoundMode from "./gamemodes/Round";
+import TimeMode from "./gamemodes/Time";
+import CasualMode from "./gamemodes/Casual";
+
+let mode;
 
 function getQuestion(array) {
   const newArray = [];
@@ -35,9 +38,6 @@ function getAnswers(array, i) {
 }
 
 export default function Game(props) {
-  const expiryTimestamp = new Date();
-  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + props.time);
-
   const [question, setQuestion] = React.useState([]);
   const [correctAnswer, setCorrectAnswer] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -46,13 +46,7 @@ export default function Game(props) {
   const [round, setRound] = React.useState(1);
   const [score, setScore] = React.useState(0);
   const [moves, setMoves] = React.useState(0);
-  const [win, setWin] = React.useState(false);
   const [gameOver, setGameOver] = React.useState(false);
-  const { seconds, minutes, isRunning, start, pause, resume, restart } =
-    useTimer({
-      expiryTimestamp,
-      onExpire: () => setGameOver(true),
-    });
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -124,6 +118,54 @@ export default function Game(props) {
     );
   });
 
+  switch (props.mode) {
+    case "":
+      mode = (
+        <CasualMode
+          quesList={questionElm}
+          category={props.category}
+          moves={moves}
+          correctAns={correctAnswer}
+          ques={question}
+          attempt={attempt}
+          handleCheck={checkAnswer}
+          isLoading={isLoading}
+        />
+      );
+      break;
+    case "time":
+      mode = (
+        <TimeMode
+          quesList={questionElm}
+          category={props.category}
+          moves={moves}
+          correctAns={correctAnswer}
+          ques={question}
+          round={round}
+          time={props.time}
+          attempt={attempt}
+          handleCheck={checkAnswer}
+          isLoading={isLoading}
+        />
+      );
+      break;
+    case "round":
+      mode = (
+        <RoundMode
+          quesList={questionElm}
+          category={props.category}
+          moves={moves}
+          correctAns={correctAnswer}
+          ques={question}
+          round={round}
+          attempt={attempt}
+          handleCheck={checkAnswer}
+          isLoading={isLoading}
+        />
+      );
+      break;
+  }
+
   return (
     <div className="game-scr">
       {gameOver && (
@@ -150,50 +192,7 @@ export default function Game(props) {
           />
         </div>
       </header>
-      <div className="status">
-        <p>
-          Category: <span>{props.category.category.toUpperCase()}</span>
-        </p>
-        <p>
-          Type: <span>{props.category.type.toUpperCase()}</span>
-        </p>
-        <p>
-          Difficulty: <span>{props.category.difficulty.toUpperCase()}</span>
-        </p>
-        <p>
-          Time Left: <span>{minutes == 0 ? "" : minutes + "m"}</span>
-          <span>{seconds}s</span>
-        </p>
-        <p>
-          Round: <span>{round}</span>
-        </p>
-        <p>
-          Moves: <span>{moves}</span>
-        </p>
-      </div>
-      <div className="questions-container">
-        {isLoading ? (
-          <img style={{ width: "75px" }} src="/assets/loading.gif" />
-        ) : (
-          <div className="question-container-wrapper">{questionElm}</div>
-        )}
-      </div>
-
-      <div className="result">
-        {attempt ? (
-          <p>
-            You got <b>{correctAnswer}</b> correct answers out of{" "}
-            <b>{question.length}</b> questions
-          </p>
-        ) : (
-          <p>
-            Please Attempt <b>{question.length}</b> question to check answer
-          </p>
-        )}
-        <button disabled={!attempt} onClick={solved ? nextRound : checkAnswer}>
-          {solved ? "Next Round" : "Check Answer"}
-        </button>
-      </div>
+      {mode}
     </div>
   );
 }

@@ -36,9 +36,9 @@ body {
 
 body {
   background-image:
-    radial-gradient(at 75% 81%, hsla(297, 71%, 68%, 1) 0px, transparent 50%),
-    radial-gradient(at 63% 33%, hsla(167, 90%, 60%, 1) 0px, transparent 50%),
-    radial-gradient(at 15% 62%, hsla(229, 93%, 69%, 1) 21px, transparent 50%);
+    radial-gradient(at 75% 81%, hsl(297, 71%, 68%) 0px, transparent 50%),
+    radial-gradient(at 63% 33%, hsl(167, 90%, 60%) 0px, transparent 50%),
+    radial-gradient(at 15% 62%, hsl(229, 92%, 69%) 21px, transparent 50%);
   background-repeat: no-repeat;
   transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
   overflow: hidden;
