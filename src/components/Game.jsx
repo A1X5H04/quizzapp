@@ -83,11 +83,17 @@ export default function Game(props) {
   }
 
   function nextRound() {
-    setRound((prevRound) => prevRound + 1);
+    const noOfRound = props.noOfRounds;
+    noOfRound <= round
+      ? setGameOver(true)
+      : setRound((prevRound) => prevRound + 1);
     setCorrectAnswer(0);
     setSolved(false);
-    setWin(false);
     setattempt(false);
+  }
+
+  function calculateScore() {
+    setScore(10);
   }
 
   function checkAnswer() {
@@ -97,11 +103,8 @@ export default function Game(props) {
       });
       setCorrectAnswer((prev) => (prev += correctAnsArr.length));
     });
+    calculateScore();
     setSolved(true);
-  }
-
-  function calculateScore() {
-    const wrongAnswer = correctAnswer - question.length;
   }
 
   const questionElm = question.map((item) => {
@@ -126,8 +129,11 @@ export default function Game(props) {
           category={props.category}
           moves={moves}
           correctAns={correctAnswer}
+          solved={solved}
+          score={score}
           ques={question}
           attempt={attempt}
+          exit={props.handleClick}
           handleCheck={checkAnswer}
           isLoading={isLoading}
         />
@@ -143,6 +149,7 @@ export default function Game(props) {
           ques={question}
           round={round}
           time={props.time}
+          exit={props.handleClick}
           attempt={attempt}
           handleCheck={checkAnswer}
           isLoading={isLoading}
@@ -158,8 +165,12 @@ export default function Game(props) {
           correctAns={correctAnswer}
           ques={question}
           round={round}
+          gameover={gameOver}
+          solved={solved}
           attempt={attempt}
-          handleCheck={checkAnswer}
+          exit={props.handleClick}
+          nextRound={nextRound}
+          checkAnswer={checkAnswer}
           isLoading={isLoading}
         />
       );

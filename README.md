@@ -16,7 +16,7 @@ This Quiz Game is entirely made in ⚛️ react with a clean and Aesthetic look,
 1. Upto 25 Categories
 2. Three Difficulty Modes: Easy, Medium and Hard
 3. Two types: true/false and multiple choice question
-4. Multiple GameModes: Casual, Time Rush and Round
+4. Multiple Game Modes: Casual, Time Rush and Round
 5. Choose how many questions you want: from 1 (default is 5) to 50 questions
 6. LeaderBoard Screen
 

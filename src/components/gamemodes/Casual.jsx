@@ -1,6 +1,16 @@
+import GameOver from "../GameOver";
+
 export default function CasualMode(props) {
+  function calculateScore() {
+    const wrongAns = props.correctAns - props.ques.length;
+    const correctAns = props.correctAns;
+  }
+
   return (
     <>
+      {props.solved && (
+        <GameOver handleClick={props.exit} score={props.score} />
+      )}
       <div className="status">
         <p>
           Category: <span>{props.category.category.toUpperCase()}</span>

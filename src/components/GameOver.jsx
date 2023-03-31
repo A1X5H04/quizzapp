@@ -35,7 +35,7 @@ export default function gameOverScr(props) {
         {renderHeader}
         <div className="content">
           <h4>
-            Your Score <br /> <span>0</span>
+            Your Score <br /> <span>{props.score}</span>
           </h4>
           <div className="stats-grid">
             <div>

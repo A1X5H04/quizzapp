@@ -13,7 +13,7 @@ export default function TimeMode(props) {
 
   return (
     <>
-      {gameOver && <GameOver />}
+      {gameOver && <GameOver mode={"time"} handleClick={props.exit} />}
       <div className="status">
         <p>
           Category: <span>{props.category.category.toUpperCase()}</span>

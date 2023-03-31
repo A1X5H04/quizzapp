@@ -1,6 +1,9 @@
+import GameOver from "../GameOver";
+
 export default function RoundMode(props) {
   return (
     <>
+      {props.gameover && <GameOver mode={"round"} handleClick={props.exit} />}
       <div className="status">
         <p>
           Category: <span>{props.category.category.toUpperCase()}</span>
@@ -40,8 +43,10 @@ export default function RoundMode(props) {
             Please Attempt <b>{props.ques.length}</b> question to check answer
           </p>
         )}
-        <button disabled={!props.attempt} onClick={props.handleCheck}>
-          "Check Answer"
+        <button
+          disabled={!props.attempt}
+          onClick={props.solved ? props.nextRound : props.checkAnswer}>
+          {props.solved ? "Next Round" : "Check Answer"}
         </button>
       </div>
     </>
